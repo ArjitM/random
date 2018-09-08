@@ -14,13 +14,17 @@ def find(lines):
 		if i==0:
 			i+=1
 			continue
+		i+=1
+
+		if i == 100:
+			break
 
 		info = line.split(",")
 		cityName = info[0][1:-1]
 		stateID = info[2][1:-1]
 
 
-		print(info[6])
+		#print(info[6])
 		lat = float(info[6][1:-1])
 		lng = float(info[7][1:-1])
 
@@ -35,7 +39,7 @@ def find(lines):
 			continue
 		score_raw = numpy.mean(rpvs)
 		output.append("%s, %s, %f, %s" % (cityName, stateID, score_raw, relative_ppbs))
-		print(output[-1])
+		#print(output[-1])
 	return output
 
 
@@ -64,7 +68,7 @@ lines = cities.readlines()
 data = find(lines)
 output = open('cityContaminants.csv', 'w')
 for d in data:
-	output.write(d)
+	output.write(d + '\n')
 
 output.close()
 
